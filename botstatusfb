@@ -1,0 +1,72 @@
+#!/data/data/com.termux/files/usr/bin/php
+<?php
+pilih:
+system('clear');
+date_default_timezone_set('Asia/Jakarta');
+$date   = date('d-M-Y H:i:s');
+$green  = "\e[92m";
+$red    = "\e[91m";
+$yellow = "\e[93m";
+$blue   = "\e[36m";
+echo "\n$magenta
+ ____        _    _   __        _    _____
+| __ )  ___ | |_ | | / / _____ | |_ |  __ \
+|  _ \ / _ \|  _|| |/ / |  _  ||  _|| |  \ \
+| |_) | (_) | |_ |  _ \ | | | || |_ | |__/ /
+|____/ \___/ \__||_| \_\|_| |_|\___||_____/";
+echo "\n$blue
+Author  : Valdo Taroreh
+Type    : Bot Auto Post Status
+Github  : http://github.com/valdot
+Version : 0.1 (Private)
+Access  : $date\n";
+    echo "$red(_)(_)======D$green\n";
+@header('Content-Type: text/html; charset=UTF-8');
+function input($echo) {
+    echo "$echo --> ";
+}
+input("Lu Mau Pake Bot Ga Ngentod ? [y/g]");
+$pilih = trim(fgets(STDIN));
+if($pilih == "g") {
+    die("$red(!)$CABUT SONO LO NGENTOD$red (!)\n");
+} elseif($pilih == "y") {
+    echo "$red(_)(_)======D$green\n";
+    input("Kode Akses Tokennya Ngentod");
+    $token = trim(fgets(STDIN));
+    echo "$red(_)(_)======D$green\n";
+} else {
+    echo "$red(!)$yellow Invalid$red (!)\n";
+    goto pilih;
+}
+input("Lu Mau Post Status Berapa Kali Kontol");
+$count = trim(fgets(STDIN));
+    echo "$red(_)(_)======D$green\n";
+include('status.php');
+for($x = 0; $x < $count; $x++) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/me/feed');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "method=POST&message=$status[$x]&access_token=$token");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    $tampil=curl_exec($ch);
+    curl_close($ch);
+    echo "Status Lu Nih Bangsat ↓↓↓↓↓
+$status[$x] 
+\n";
+    echo "$red(_)(_)======D$green\n";
+    if(preg_match('/true/', $tampil)) {
+        echo "Status Lu Udah Dipost Ye Bujank\n";
+        }
+    $sleep = array(
+        "120",
+        "90",
+        "60",
+        "30"
+    ); // Menit
+    $slp   = array_rand($sleep);
+    $slp2  = $sleep[$slp];
+    echo "Tunda Dulu Ye Memeq Selama $slp2 Abad Hwhw\n";
+    echo "$red(_)(_)======D$green\n";
+    sleep($slp2); // Random Delay
+}
+?>
